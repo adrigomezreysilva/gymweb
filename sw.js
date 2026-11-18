@@ -1,6 +1,16 @@
 'use strict';
 // Sube el número de versión cada vez que cambies archivos para que los dispositivos se actualicen.
-const V='gymprogress-v1',FILES=['./','index.html','css/styles.css','js/data.js','js/app.js','manifest.json','icons/icon-180.png','icons/icon-192.png','icons/icon-512.png'];
+const V='gymprogress-v2',FILES=[
+  './',
+  'index.html',
+  'styles.css',
+  'data.js',
+  'app.js',
+  'manifest.json',
+  'icon-180.png',
+  'icon-192.png',
+  'icon-512.png'
+];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==V).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
 // Caché primero (funciona sin conexión) y actualización en segundo plano
